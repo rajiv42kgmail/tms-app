@@ -348,7 +348,7 @@ export default function Shipments({url}) {
             </thead>
             <tbody className="divide-y divide-gray-100">
               {paginatedProducts.map((p) => (
-                <tr  key={p.id} className={`hover:bg-gray-50 ${p.flagged ? "bg-yellow-50" : ""}`}>
+                <tr  key={p.id} className={`${p.flagged ? "bg-yellow-50" : "hover:bg-gray-50"}`}>
                   <td className="px-4 py-2">
                     <img src={p.thumbnail} alt={p.title} className="h-12 w-12 object-contain rounded" />
                   </td>
