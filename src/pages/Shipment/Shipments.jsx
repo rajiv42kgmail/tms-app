@@ -10,7 +10,7 @@ import {
 } from "react-icons/fa";
 
 const Tooltip = ({ text, children }) => (
-  <div>
+  <div className="relative group">
     {children}
     <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
       whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white
