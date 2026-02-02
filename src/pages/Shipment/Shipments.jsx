@@ -9,7 +9,16 @@ import {
   FaTrash,
 } from "react-icons/fa";
 
-
+const Tooltip = ({ text, children }) => (
+  <div>
+    {children}
+    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2
+      whitespace-nowrap rounded bg-gray-800 px-2 py-1 text-xs text-white
+      opacity-0 group-hover:opacity-100 transition pointer-events-none z-50">
+      {text}
+    </span>
+  </div>
+);
 /* ================= DELETE MODAL ================= */
 const DeleteConfirmationModal = ({ item, onClose, onConfirm }) => {
   if (!item) return null;
@@ -352,10 +361,37 @@ export default function Shipments({url}) {
                     </div>
                   </td>
                   <td className="px-4 py-2">{p.shippingInformation}</td>
+                  
+
+
+
                   <td className="px-4 py-2 flex gap-2">
-                    <button onClick={() => setEditItem(p)} className="text-blue-600"><FaEdit /></button>
-                    <button onClick={() => handleFlag(p.id)} className={`text-yellow-600 ${p.flagged?"opacity-100":"opacity-50"}`}><FaFlag /></button>
-                    <button onClick={() => handleDeleteClick(p)} className="text-red-600"><FaTrash /></button>
+                      {/* EDIT */}
+                      <Tooltip text="Edit">
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedItem(null);
+                            setEditItem(p);
+                          }}
+                          className="text-blue-600 hover:text-blue-800"
+                        >
+                          <FaEdit />
+                        </button>
+                      </Tooltip>
+                        {/* FLAG */}
+                      <Tooltip text="Flag">
+                      <button
+                          onClick={() => handleFlag(p.id)}
+                          className={`text-yellow-600 ${p.flagged?"opacity-100":"opacity-50"}`}
+                        >
+                          <FaFlag />
+                        </button>
+                      </Tooltip>
+                        {/* DELETE */}
+                        <Tooltip text="Delete">
+                              <button onClick={() => handleDeleteClick(p)} className="text-red-600"><FaTrash /></button>
+                        </Tooltip>
                   </td>
                 </tr>
               ))}
